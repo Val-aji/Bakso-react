@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import Nav from "./Component/Nav";
+import JudulHalaman from "./Component/JudulHalaman";
+import Menu from "./Menu/menu";
+import Keranjang from "./Keranjang/keranjang";
 
 function App() {
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="container" className="d-flex">
+      <nav className={(window.innerWidth < 768) ? "d-none" : undefined}>
+        <Nav />
+      </nav>
+      <main>
+          <JudulHalaman judul="Bakso Cuyy"/>
+          <Keranjang />
+
+      </main>
     </div>
   );
 }
