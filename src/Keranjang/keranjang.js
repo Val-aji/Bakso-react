@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-
-import data from "../data"
+import JudulHalaman from "../Navigasi/judulHalaman";
+import data from "../data";
 
 
 function Keranjang() {
@@ -8,29 +8,26 @@ function Keranjang() {
     
     let dataList = [data[0][1], data[0][4], data[1][3]];
     let classCard = "cardList d-flex border-bottom my-2 position-relative";
-    let classFooter = "position-fixed start-0 end-0 bottom-0 d-flex justify-content-between p-2 bg-secondary";
+    let classFooter = "position-fixed  end-0 d-flex start-0 bottom-0 justify-content-between p-2 bg-secondary";
     
-    let totalHarga = 0;
+    let [jumlah, setJumlah] = useState(1)
+    let [totalHarga, setTotalHarga] = useState(0);
     
-    let [jumlah, setJumlah] = useState(0)
-    
-    useEffect(() => {
-        console.info("total harga bertambah")
-    }, [totalHarga]);
     
     
     return(
         <>
-            <div className="p-3">
+        <JudulHalaman judul="Keranjang Cuyy" />
+            <div className="p-3 mb-5">
                 {dataList.map((value, index) => {
                     return (
 
                         <div className={classCard} key={index}>
-                            <img src={"img/"+value.gambar} className="img-fluid" id="gambarKeranjang" />
+                            <img src={"./img/img/"+value.gambar} className="img-fluid" id="gambarKeranjang" alt="gambar"/>
                             {// 40%/hp 30% laptop 
                             }
                             
-                            <div className="informasi d-flex flex-column m-2">
+                            <div className="informasi d-flex flex-column px-1 mb-3">
                             {// my-2 mx-5 (laptop) //
                             }
                             
@@ -46,20 +43,23 @@ function Keranjang() {
                                 <div className="d-flex">
                                 <button className="btn btn-primary"
                                     onClick={() => { 
-                                totalHarga -= value.harga * jumlah;
+                                
                                 if(jumlah > 1)  {
-                                    setJumlah(jumlah--);
+                                    setJumlah(jumlah -= 1);
+                                    setTotalHarga(totalHarga -= value.harga)
                                 } else {
                                     setJumlah(1)
+                               
                                 }}}>
                                     -
                                     </button>
-                                    <p className="m-2"> {jumlah} </p>
+                                    <p className="m-2"> {jumlah}
+                                     </p>
                                     
                                     <button className="btn btn-primary" 
                                     onClick={() => {
-                                setJumlah(jumlah++);
-                                totalHarga += value.harga * jumlah;
+                                setJumlah(jumlah += 1);
+                                setTotalHarga(totalHarga += value.harga)
                                     }}> + 
                                     </button>
                                 </div>
@@ -67,7 +67,7 @@ function Keranjang() {
                                 <input type="text" placeholder="Keterangan..." className="form-control border-primary my-2" />
                             
                             
-                            <input type="radio" className="position-absolute top-0 end-0" />
+                            <input type="checkbox" className="position-absolute top-0 end-0" />
                                     
                             </div>
                     </div>

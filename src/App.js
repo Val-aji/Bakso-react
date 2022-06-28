@@ -1,23 +1,71 @@
-import Nav from "./Component/Nav";
-import JudulHalaman from "./Component/JudulHalaman";
+import React from "react";
+import {BrowserRouter, Routes, Link, Route} from "react-router-dom";
+import Nav from "./Navigasi/nav";
 import Menu from "./Menu/menu";
 import Keranjang from "./Keranjang/keranjang";
 
-function App() {
+import Proses from "./Transaksi/proses";
+import Selesai from "./Transaksi/selesai";
 
+import Tentang from "./Tentang/tentang";
+
+
+function App() {
+  
 
   return (
-    <div id="container" className="d-flex">
-      <nav className={(window.innerWidth < 768) ? "d-none" : undefined}>
+    <div>
+      
+    
+      <nav>
         <Nav />
       </nav>
+      
       <main>
-          <JudulHalaman judul="Bakso Cuyy"/>
-          <Keranjang />
-
+      
+        
+        
+        <BrowserRouter>
+         
+          <Routes>
+            <Route path="/"
+            element={<Menu />}
+            />
+           </Routes>
+          
+          <Routes>
+            <Route path="/keranjang"
+            element={<Keranjang />}
+            />
+           </Routes>
+           
+           <Routes>
+            <Route path="/proses"
+            element={<Proses />}
+            />
+           </Routes>
+           
+           <Routes>
+            <Route path="/selesai"
+            element={<Selesai />}
+            />
+           </Routes>
+           
+           <Routes>
+            <Route path="/tentang"
+            element={<Tentang />}
+            />
+           </Routes>
+          
+          
+        </BrowserRouter>
+        
+       
       </main>
+      
+    
     </div>
-  );
+  )
 }
 
 export default App;

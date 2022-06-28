@@ -4,10 +4,15 @@
     box-sizing: border-box;
 }
 
+.f-openSans {
+  font-family: 'Open Sans' !important;
+  
+  
+}
 
 #navbar {
-    height: 100vh;
-
+    height: 115vh;
+    position: absolute;
 }
 
 .cardMakan > img {
@@ -15,11 +20,14 @@
     height: 50% !important;
 }
 
+
 @media screen and (max-width: 767px) {
     nav {
         width: 30%;
         position: fixed;
-        z-index: 999;
+        height: 100vh;
+        z-index: 9999;
+        
 
     }
     main {
@@ -33,14 +41,21 @@
 
     #gambarKeranjang {
         width: 40%;
+        height: 120px;
     }
-
+    
+    .cardTransaksi > div > img {
+      width: 35%;
+      height: 120px;
+    }
 }
 
 @media screen and (min-width: 768px) {
     nav {
         width: 20%;
+ 
         position: fixed;
+        z-index: 999;
     }
 
     main {
@@ -64,12 +79,35 @@
     .informasi {
         margin: .5rem 3rem;
     }
+    
+    /* Keranjang */
 
     #gambarKeranjang {
         width: 30%;
-
+        height: 120px;
     }
     
+    #footer {
+      width: 80%;
+      margin-left: 20%;
+      
+    }
+    
+    /* end Keranjang */
+      
+    /* Transaksi */
+    .containerCardTransaksi {
+       display: flex;
+       flex-wrap: wrap;
+       
+    }
+    .cardTransaksi {
+      width: 45%;
+    }
+    .cardTransaksi > div > img {
+      width: 35%;
+      height: 120px;
+    }
 }
 
 

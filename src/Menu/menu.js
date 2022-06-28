@@ -1,11 +1,14 @@
 import Data from "../data";
+import JudulHalaman from "../Navigasi/judulHalaman";
+import React from "react";
 
 function Menu() {
     let classCard = "cardMakan d-flex flex-column justify-content-between bg-secondary m-2 text-white";
+    
 
     return(
         <>
-
+          <JudulHalaman judul="Bakso Cuyy" />
           {Data.map((dataList, index) => {
             return (
 
@@ -13,8 +16,8 @@ function Menu() {
                 {dataList.map((value, index1) => {
                     return(
                     <div className={classCard} key={index1}>
-
-                        <img src={"img/"+value.gambar} className="img-fluid" />
+                    
+                        <img src={"./img/img/"+value.gambar} className="img-fluid" alt={value.gambar} />
                         
                         <p className="p-1 lead text-dark">
                             {value.nama}
