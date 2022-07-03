@@ -1,6 +1,4 @@
 import React from "react";
-import Proses from "./proses";
-import Selesai from "./selesai";
 
 function NavTransaksi() {
   

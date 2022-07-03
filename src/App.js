@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, Routes, Link, Route} from "react-router-dom";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Nav from "./Navigasi/nav";
 import Menu from "./Menu/menu";
 import Keranjang from "./Keranjang/keranjang";
@@ -17,7 +17,7 @@ function App() {
     <div>
       
     
-      <nav>
+      <nav className="d-none">
         <Nav />
       </nav>
       
