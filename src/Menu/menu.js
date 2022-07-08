@@ -1,47 +1,13 @@
 import Data from "../data";
 import JudulHalaman from "../Navigasi/judulHalaman";
-import React, {useState, useEffect} from "react";
+import {useState, useEffect} from "react";
+import {connect} from "react-redux"
 
-
-function Menu() {
-    let classCard = "cardMakan d-flex flex-column justify-content-between bg-secondary m-2 text-white";
-
-    let [tes, setTes] = useState(["satu", "dua"])
-    let [vari, setVari] = useState("Vari");
-
-    useEffect(() => {
-        vari === "vari" ? setVari("Vari diubah") : setVari("vari");
-
-    }, [tes])
-
-    let x = tes;
-    function ubahTes() {
-        
-        
-        tes.push("ketiga")
-        setTes([tes])
-        
-        console.log(tes[1])
-
-    }
-
-
+function Menu(props) {
+    let classCard = "cardMakan d-flex flex-column justify-content-between bg-secondary m-2 text-white"
+      
     return(
-        
         <>
-            <b>{vari}</b>
-            <br />
-
-
-            {x.map((value2, index2) => {
-                return (
-                    <b key={index2}> {value2} </b>
-                )
-            })}    
-
-
-            <button className="btn btn-link" onClick={ubahTes}>Klik Saya</button>
-            
           <JudulHalaman judul="Bakso Cuyy" />
           {Data.map((dataList, index) => {
             return (
@@ -59,10 +25,12 @@ function Menu() {
                         
                         <div className="d-flex justify-content-end">
                             <p> 
-                                {Intl.NumberFormat().format(value.harga)}
+                                {`Rp${Intl.NumberFormat().format(value.harga)}`}
                             </p>
                             
-                            <button className="btn btn-danger btn-sm ms-2">
+                            <button className="btn btn-danger btn-sm ms-3"
+                            onClick={props.pesanMenu} 
+                            value={value.id}>
                             pesan
                             </button>
                         </div>
@@ -74,14 +42,25 @@ function Menu() {
             </div>
             )
           })}
-          
+           
         </>
     
     )
 
 }
 
-export default Menu;
+const stateData = state => {
+  return {
+    dataKeranjang: state.dataKeranjang
+  }
+}
+
+const actionData = action => {
+  return {
+    pesanMenu: e => action({type: "pesanMenu", idMenu: e.target.value
+  })
+}}
+export default connect(stateData, actionData)(Menu);
 
 
 

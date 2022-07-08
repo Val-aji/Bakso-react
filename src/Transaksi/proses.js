@@ -2,10 +2,10 @@ import React from "react";
 import Data from "../data";
 import JudulHalaman from "../Navigasi/judulHalaman";
 import NavTransaksi from "./navTransaksi";
+import {connect} from "react-redux";
 
-function Proses() {
-  let data = [Data[0][2], Data[1][4]];      
-  console.info(data);
+function Proses(props) {
+  let data = props.dataProses
   
   return (
     <>
@@ -32,7 +32,11 @@ function Proses() {
                    </div>
                   <div className="d-flex justify-content-between">
                       <p className="text-secondary">Sedang Diproses</p>
-                      <p className="text-danger">{value.harga}</p>
+                      <div className="d-flex">
+                        <p className="hargaAwal text-dark fw-light"> {`(${value.jumlah})`} </p>
+                        <p className="text-danger ms-1">{`Rp${Intl.NumberFormat().format(value.hargaAkhir)}`}</p>
+                        </div>
+                  
                   </div>
            </div>
           )
@@ -43,4 +47,10 @@ function Proses() {
     )
 }
 
-export default Proses;
+
+const stateDataProses = state => {
+  return {
+    dataProses: state.dataProses
+  }
+}
+export default connect(stateDataProses)(Proses);

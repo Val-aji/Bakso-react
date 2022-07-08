@@ -2,10 +2,10 @@ import React from "react";
 import Data from "../data";
 import JudulHalaman from "../Navigasi/judulHalaman";
 import NavTransaksi from "./navTransaksi";
-
-function Selesai() {
+import {connect} from "react-redux";
+function Selesai(props) {
   
-  let data = [Data[0][0], Data[1][1]];
+  let data = props.dataSelesai
   return (
    <>
     <JudulHalaman judul="Selesai Cuyy" />
@@ -43,4 +43,9 @@ function Selesai() {
   )
 }
 
-export default Selesai;
+const stateDataSelesai = state => {
+  return {
+    dataSelesai: state.dataSelesai
+  }
+}
+export default connect(stateDataSelesai)(Selesai);

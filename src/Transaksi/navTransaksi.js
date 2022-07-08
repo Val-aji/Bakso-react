@@ -1,5 +1,7 @@
 import React from "react";
-
+import Proses from "./proses";
+import Selesai from "./selesai";
+import {Link} from "react-router-dom"
 function NavTransaksi() {
   
   
@@ -7,14 +9,14 @@ function NavTransaksi() {
     <>
      <div className="p-3 d-flex justify-content-around">
     
-                <a href="/proses"
+                <Link to="/proses"
                 className="btn btn-primary ">
                     Proses
-                </a>
-                <a href="/selesai"
+                </Link>
+                <Link to="/selesai"
                 className="btn btn-primary">
                     Selesai
-                </a>
+                </Link>
                 
                 
                

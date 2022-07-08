@@ -20,6 +20,10 @@
     height: 50% !important;
 }
 
+.hargaAwal {
+  font-size: .8em;
+}
+
 
 @media screen and (max-width: 767px) {
     nav {

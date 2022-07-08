@@ -1,71 +1,46 @@
 import React from "react";
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {BrowserRouter, Routes, Link, Route} from "react-router-dom";
 import Nav from "./Navigasi/nav";
 import Menu from "./Menu/menu";
 import Keranjang from "./Keranjang/keranjang";
-
 import Proses from "./Transaksi/proses";
 import Selesai from "./Transaksi/selesai";
-
 import Tentang from "./Tentang/tentang";
+import {connect} from "react-redux";
 
-
-function App() {
-  
-
+function App(props) {
+ 
   return (
-    <div>
-      
-    
-      <nav className="d-none">
-        <Nav />
-      </nav>
-      
-      <main>
-      
-        
-        
-        <BrowserRouter>
-         
-          <Routes>
+     <BrowserRouter>
+           <nav>
+              <Nav />
+           </nav>
+           
+         <main>
+            <Routes>
             <Route path="/"
             element={<Menu />}
             />
-           </Routes>
-          
-          <Routes>
+            
             <Route path="/keranjang"
             element={<Keranjang />}
             />
-           </Routes>
-           
-           <Routes>
             <Route path="/proses"
             element={<Proses />}
             />
-           </Routes>
-           
-           <Routes>
             <Route path="/selesai"
             element={<Selesai />}
             />
-           </Routes>
-           
-           <Routes>
             <Route path="/tentang"
             element={<Tentang />}
             />
-           </Routes>
-          
-          
-        </BrowserRouter>
+            
+            </Routes>
+           </main>
         
-       
-      </main>
-      
-    
-    </div>
+     </BrowserRouter>
   )
 }
 
 export default App;
+
