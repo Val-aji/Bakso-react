@@ -11,16 +11,22 @@ function Keranjang(props, e) {
     
     
     let dataList = props.dataKeranjang
-    
-    return(
+    if(props.dataKeranjang.length === 0) {
+      return (
+        <>
+           <JudulHalaman judul="Keranjang Cuyy" />
+           <p className="text-center f-average text-secondary lead my-5">Maaf tidak ada data Keranjang! </p>
+         </>
+        )
+    } else {
+      return(
         <>
         <JudulHalaman judul="Keranjang Cuyy" />
             <div className="p-3 mb-5">
           
                 {dataList.map((value, index) => {
-    
                     return (
-              
+                     
                         <div className={classCard} key={index}>
                             <img src={"./img/img/"+value.gambar} className="img-fluid" id="gambarKeranjang" alt="gambar"/>
                             {// 40%/hp 30% laptop 
@@ -71,6 +77,7 @@ function Keranjang(props, e) {
            
                 })}
             </div>
+         
             
             <div id="footer" className={classFooter}> 
                 <div className="d-flex flex-column">
@@ -87,8 +94,9 @@ function Keranjang(props, e) {
                 
 
             </div>
+    
         </>
-    )
+    )}
 }
 
 const stateDataKeranjang = state => { return {

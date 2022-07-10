@@ -4,11 +4,12 @@ import {BrowserRouter,Route, Link, Switch} from "react-router-dom";
 
 function Nav() {
     let classNavbar = "bg-dark d-flex flex-column justify-content-center align-items-center position-relative"
-    let classTombol = "btn btn-link  btn-primary text-white text-decoration-none w-100 my-4"
+    let classTombol = "btn btn-link  btn-primary text-white text-decoration-none w-100 my-4 tombolNav"
     let listTombol = [["/", "Menu"], ["/keranjang", "Keranjang"], ["/proses", "Tranksaksi"], ["/tentang", "Tentang"]];
     
-    let [home, setHome] = useState("menu");
- 
+    
+    
+    
     return (
             <div id="navbar" className={classNavbar}> {
                     (window.innerWidth < 768) ? 
@@ -21,7 +22,9 @@ function Nav() {
                 return (
                 <Link key={index}
                 to={value[0]}
+                id={index}
                 className={classTombol}
+             
                 >
                 {value[1]}
                 </Link>

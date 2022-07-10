@@ -6,6 +6,20 @@ import {connect} from "react-redux";
 function Selesai(props) {
   
   let data = props.dataSelesai
+  
+  if(data.length === 0 ) {
+    return (
+      <>
+        <JudulHalaman judul="Selesai Cuyy" />
+        <NavTransaksi />
+        
+        <p className="f-average text-center lead text-secondary my-5">Maaf tidak ada data Selesai! </p>
+      
+      </>
+      )
+  } else {
+    
+  
   return (
    <>
     <JudulHalaman judul="Selesai Cuyy" />
@@ -40,7 +54,7 @@ function Selesai(props) {
     </div>
     
    </>
-  )
+  )}
 }
 
 const stateDataSelesai = state => {

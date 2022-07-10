@@ -1,3 +1,10 @@
+path 0.1.1:
+ apa yang baru?
+ 1. memperbaiki bug dimana ketika kita pencet tombol selesai dihalaman proses maka tombol selesai selanjutnya (jika ada) tidak berfungsi
+2. memberikan informasi jika data pada halaman tidak ada
+3. menambahkan garis sebagai pemisah dibawah navigasi halaman transaksi
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

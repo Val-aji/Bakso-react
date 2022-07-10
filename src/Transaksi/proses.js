@@ -1,20 +1,31 @@
 import React from "react";
 import Data from "../data";
 import JudulHalaman from "../Navigasi/judulHalaman";
+import {Link} from "react-router-dom"
 import NavTransaksi from "./navTransaksi";
 import {connect} from "react-redux";
 
 function Proses(props) {
-  let data = props.dataProses
   
-  return (
+  
+  if(props.dataProses.length === 0) {
+    return (
+      <>
+       <JudulHalaman judul="Proses Cuyy" />
+        <NavTransaksi />
+        
+        <p className="f-average text-center text-secondary lead my-5">Maaf tidak ada data Proses! </p>
+        
+      </>
+      )
+  } else {
+    return (
     <>
-    
       <JudulHalaman judul="Proses Cuyy" />
       <NavTransaksi />
       
      <div className="containerCardTransaksi">
-      {data.map((value, index) => {
+      {props.dataProses.map((value, index) => {
         return (
           
        <div className="cardTransaksi px-2 m-3 border border-2" key={index}>
@@ -35,7 +46,14 @@ function Proses(props) {
                       <div className="d-flex">
                         <p className="hargaAwal text-dark fw-light"> {`(${value.jumlah})`} </p>
                         <p className="text-danger ms-1">{`Rp${Intl.NumberFormat().format(value.hargaAkhir)}`}</p>
-                        </div>
+                      
+                      
+                      
+                     <Link to="/proses"> 
+                        <button className="btn btn-sm btn-warning m-1" onClick={props.tombolProses} id={index}>Selesai </button>
+                     </Link>
+               
+                       </div>
                   
                   </div>
            </div>
@@ -44,13 +62,22 @@ function Proses(props) {
       </div>
     </>
     
-    )
+    )}
 }
 
 
-const stateDataProses = state => {
+const stateProses = state => {
   return {
-    dataProses: state.dataProses
+    dataProses: state.dataProses,
   }
 }
-export default connect(stateDataProses)(Proses);
+
+const actionProses = dispatch => {
+  return {
+    tombolProses: e =>  dispatch({
+      type: "tombolProses",
+      target: e.target
+   })
+  }
+}
+export default connect(stateProses, actionProses)(Proses);

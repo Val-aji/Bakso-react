@@ -15,23 +15,21 @@ let dataProduk = {
   dataSelesai: []
 }
 
+
 const reducer = (state = dataProduk, action) => {
   switch(action.type) {
   case "pesanMenu" :
        let idMenu = action.idMenu.toString()
        const awal = parseInt(idMenu[0]) - 1;
        const akhir = parseInt(idMenu.substr(1)) - 1;
-    
-       let fakeData = state.dataKeranjang.slice()
-       fakeData.push(data[awal][akhir])
-       let fakeJumlah = state.jumlah.slice()
-       fakeJumlah.push(1)
+       
+       state.dataKeranjang.push(data[awal][akhir])
+       
+       state.jumlah.push(1)
     
        return {
          ...state,
-         dataKeranjang: fakeData,
-         jumlah: fakeJumlah,
-         harga: fakeData.slice().map((value, index) => value.harga * fakeJumlah[index]),
+         harga: state.dataKeranjang.slice().map((value, index) => value.harga * state.jumlah[index]),
          total: state.total + data[awal][akhir].harga
         }
     
@@ -42,8 +40,6 @@ const reducer = (state = dataProduk, action) => {
         const idK = action.idKeranjang;
         const valueK = action.valueKeranjang
         const hargaAwal = state.dataKeranjang[idK].harga;
-        
-       
         
         if(valueK === "tambah" ) {
           state.jumlah[idK] += 1 ;
@@ -58,16 +54,11 @@ const reducer = (state = dataProduk, action) => {
           }
         } 
        return {
-         ...state,
-         jumlah: state.jumlah,
-         harga: state.harga,
-         total: state.total
+         ...state
        }
       break;
  case "checkout":
    // nama gambar hargaAkhir jumlah
-
-      const awalSelesai = state.dataSelesai.slice()
       state.dataKeranjang.map((value, index) => {
         let fakeDataProses = {}
         fakeDataProses.nama = value.nama
@@ -76,29 +67,31 @@ const reducer = (state = dataProduk, action) => {
         fakeDataProses.jumlah = state.jumlah[index]
         state.dataProses.push(fakeDataProses)
       })
-      
-      
-      
-      setTimeout(() => {
-        state.dataProses.map((value, index) => {
-          state.dataSelesai.push(value)
-          alert(`Pesanan ${index + 1} telah selesai `)
-        })
-        
-       
-      }, 5000)
-      
+  
      return {
        ...state,
        dataKeranjang: [],
-       dataProses: state.dataProses,
-       dataSelesai: state.dataSelesai,
        total: 0
      }
-    
-   
-    
+  
    break;
+   case "tombolProses":
+    let id = action.target.id
+    function tombolProses() {
+      alert(`pesanan ${state.dataProses[id].nama} telah selesai`);
+      action.target.disabled = true
+      state.dataSelesai.push(state.dataProses[id])
+      delete state.dataProses[id]
+      
+      
+      
+    }
+    tombolProses()
+     return {
+       ...state
+     }
+     
+     break;
  // end setJumlah and start default
   default:
      return state

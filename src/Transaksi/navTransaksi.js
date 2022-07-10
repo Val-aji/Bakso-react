@@ -7,7 +7,7 @@ function NavTransaksi() {
   
   return (
     <>
-     <div className="p-3 d-flex justify-content-around">
+     <div className="p-3 d-flex justify-content-around border-bottom">
     
                 <Link to="/proses"
                 className="btn btn-primary ">
@@ -17,9 +17,6 @@ function NavTransaksi() {
                 className="btn btn-primary">
                     Selesai
                 </Link>
-                
-                
-               
    
      </div>
   
