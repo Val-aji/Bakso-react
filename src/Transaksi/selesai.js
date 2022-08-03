@@ -1,20 +1,28 @@
-import React from "react";
+import React, {useState} from "react";
 import Data from "../data";
 import JudulHalaman from "../Navigasi/judulHalaman";
 import NavTransaksi from "./navTransaksi";
 import {connect} from "react-redux";
+import Nav from "../Navigasi/nav";
 function Selesai(props) {
   
   let data = props.dataSelesai
-  
+  const {dataKeranjang, dataProses, dataSelesai } = props
+    const [total, setTotal] = useState({
+      dataKeranjang: dataKeranjang.length,
+      dataTransaksi: dataProses.length + dataSelesai.length
+    })
   if(data.length === 0 ) {
     return (
       <>
+        <Nav total={total}/>
+        
+        <main>
         <JudulHalaman judul="Selesai Cuyy" />
         <NavTransaksi />
         
         <p className="f-average text-center lead text-secondary my-5">Maaf tidak ada data Selesai! </p>
-      
+      </main>
       </>
       )
   } else {
@@ -22,6 +30,10 @@ function Selesai(props) {
   
   return (
    <>
+   
+   <Nav total={total}/>
+   
+   <main>
     <JudulHalaman judul="Selesai Cuyy" />
     <NavTransaksi />
     
@@ -52,6 +64,7 @@ function Selesai(props) {
      )
       })}
     </div>
+   </main>
     
    </>
   )}
@@ -59,7 +72,9 @@ function Selesai(props) {
 
 const stateDataSelesai = state => {
   return {
-    dataSelesai: state.dataSelesai
+    dataSelesai: state.dataSelesai,
+    dataKeranjang: state.dataKeranjang,
+    dataProses: state.dataProses
   }
 }
 export default connect(stateDataSelesai)(Selesai);

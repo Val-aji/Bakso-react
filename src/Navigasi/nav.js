@@ -1,35 +1,66 @@
 import React from "react";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {BrowserRouter,Route, Link, Switch} from "react-router-dom";
+import {connect} from "react-redux";
 
-function Nav() {
-    let classNavbar = "bg-dark d-flex flex-column justify-content-center align-items-center position-relative"
-    let classTombol = "btn btn-link  btn-primary text-white text-decoration-none w-100 my-4 tombolNav"
-    let listTombol = [["/", "Menu"], ["/keranjang", "Keranjang"], ["/proses", "Tranksaksi"], ["/tentang", "Tentang"]];
+function Nav(props) {
+    const classNavbar = "nav bg-dark d-flex flex-column justify-content-center align-items-center position-fixed px-2 top-0 bottom-0";
+    const classTombol = "btn btn-link  btn-primary text-white text-decoration-none w-100 my-4 tombolNav position-relative";
     
+    const [jumlahDk, setJumlahDK] = useState(1)
     
     
     
     return (
-            <div id="navbar" className={classNavbar}> {
-                    (window.innerWidth < 768) ? 
-                    <button 
-                    className="btn btn-close position-absolute top-0 end-0 bg-white" 
-                    onClick={() => document.querySelector("nav").classList.toggle("d-none")}>    
-                    </button> : undefined }
+            <div id="navbar" className={classNavbar}> 
+                 {/* LAYAR HP TOMBOL CLOSE*/}
+                 <button 
+                    className="d-md-none btn btn-close position-absolute top-0 end-0 bg-white" 
+                    onClick={()  => {
+                    const nav = document.querySelector(".nav").classList.toggle("d-none")
                     
-              {listTombol.map((value, index) => {
-                return (
-                <Link key={index}
-                to={value[0]}
-                id={index}
-                className={classTombol}
-             
+                    
+                    }}
+                    >    
+                  </button>
+                  
+               {/* tombol keranjang */}
+              
+                <Link
+                  to="/"
+                  className={classTombol}
                 >
-                {value[1]}
+                  Home
+                 
                 </Link>
-                )
-              })}
+                
+                <Link
+                  to="/keranjang"
+                  className={classTombol}
+                 
+                >
+                  Keranjang
+                  <p className=" totalCard text-warning">({props.total.dataKeranjang})</p>
+                </Link>
+                
+                
+                <Link
+                  to="/proses"
+                  className={classTombol}
+                  
+                >
+                  Transaksi
+                  <p className=" totalCard text-warning"> ({props.total.dataTransaksi})</p>
+                </Link>
+                
+                
+                <Link
+                  to="/tentang"
+                  className={classTombol}
+                >
+                  Tentang
+                </Link>
+                
                  
             </div>
             

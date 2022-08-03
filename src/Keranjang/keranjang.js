@@ -2,25 +2,37 @@ import React, {useState, useEffect} from "react";
 import JudulHalaman from "../Navigasi/judulHalaman";
 import data from "../data";
 import {connect} from "react-redux";
-
+import Nav from "../Navigasi/nav"
 
 function Keranjang(props, e) {
     
     let classCard = "cardList d-flex border-bottom my-2 position-relative";
     let classFooter = "position-fixed  end-0 d-flex start-0 bottom-0 justify-content-between p-2 bg-secondary";
     
-    
-    let dataList = props.dataKeranjang
+    const {dataKeranjang, dataProses, dataSelesai } = props
+    const [total, setTotal] = useState({
+      dataKeranjang: dataKeranjang.length,
+      dataTransaksi: dataProses.length + dataSelesai.length
+    })
+    let dataList = dataKeranjang
     if(props.dataKeranjang.length === 0) {
       return (
         <>
+          <Nav total={total}/>
+          
+          <main>
            <JudulHalaman judul="Keranjang Cuyy" />
            <p className="text-center f-average text-secondary lead my-5">Maaf tidak ada data Keranjang! </p>
+          </main>
          </>
         )
     } else {
       return(
         <>
+        
+        <Nav total={total}/>
+        
+        <main>
         <JudulHalaman judul="Keranjang Cuyy" />
             <div className="p-3 mb-5">
           
@@ -90,10 +102,11 @@ function Keranjang(props, e) {
                     </span>
                 </div>
                 
-                <button className="btn btn-primary btm-sm" onClick={props.checkout}>Pesan Sekarang</button>
+                <button className="btn btn-primary btm-sm" onClick={() => props.checkout(setTotal)}>Pesan Sekarang</button>
                 
 
             </div>
+          </main>
     
         </>
     )}
@@ -103,7 +116,9 @@ const stateDataKeranjang = state => { return {
     dataKeranjang: state.dataKeranjang,
     jumlah: state.jumlah,
     harga: state.harga,
-    total: state.total
+    total: state.total,
+    dataProses: state.dataProses,
+    dataSelesai: state.dataSelesai
     
 }}
 
@@ -115,7 +130,7 @@ const actionKeranjang = dispatch => {
       idKeranjang: e.target.id, 
       valueKeranjang: e.target.value
     }),
-    checkout: () => dispatch({type:"checkout"})
+    checkout: c => dispatch({type:"checkout", callBack: c})
     
   }}
  

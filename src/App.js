@@ -12,11 +12,7 @@ function App(props) {
  
   return (
      <BrowserRouter>
-           <nav>
-              <Nav />
-           </nav>
-           
-         <main>
+         
             <Routes>
             <Route path="/"
             element={<Menu />}
@@ -36,7 +32,7 @@ function App(props) {
             />
             
             </Routes>
-           </main>
+           
         
      </BrowserRouter>
   )

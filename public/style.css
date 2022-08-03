@@ -6,33 +6,44 @@
 
 .f-openSans {
   font-family: 'Open Sans' !important;
-  
-  
 }
 
-#navbar {
-    height: 115vh;
-    position: absolute;
-}
 
 .cardMakan > img {
     width: 100%;
     height: 50% !important;
+    border-radius: 10px;
 }
 
 .hargaAwal {
   font-size: .8em;
 }
 
+.totalCard {
+  position: absolute;
+  top: -13px;
+  right: 3px;
+}
+
+@keyframes swipeLeft {
+  0% {
+    margin-left: -150px;
+    
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+
+
 
 @media screen and (max-width: 767px) {
-    nav {
-        width: 30%;
-        position: fixed;
-        height: 100vh;
-        z-index: 9999;
-        
-
+    .nav {
+      height: 100vh;
+      animation: swipeLeft 1.5s;
+      animation-fill-mode: forwards;
+      position: relative;
+      z-index: 2;
     }
     main {
         width: 100%;
@@ -41,11 +52,14 @@
     .cardMakan{
         width: 45%;
         height: 300px;
+        border: 0px;
+        border-radius: 10px;
     }
 
     #gambarKeranjang {
         width: 40%;
         height: 120px;
+        
     }
     
     .cardTransaksi > div > img {
@@ -55,11 +69,11 @@
 }
 
 @media screen and (min-width: 768px) {
-    nav {
+    .nav {
         width: 20%;
- 
         position: fixed;
         z-index: 999;
+        animation: swipeLeft 1.5s;
     }
 
     main {

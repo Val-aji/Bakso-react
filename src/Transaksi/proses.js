@@ -1,26 +1,39 @@
-import React from "react";
+import React, {useState} from "react";
 import Data from "../data";
 import JudulHalaman from "../Navigasi/judulHalaman";
 import {Link} from "react-router-dom"
 import NavTransaksi from "./navTransaksi";
 import {connect} from "react-redux";
+import Nav from "../Navigasi/nav";
 
 function Proses(props) {
   
-  
+    const {dataKeranjang, dataProses, dataSelesai } = props
+    const [total, setTotal] = useState({
+      dataKeranjang: dataKeranjang.length,
+      dataTransaksi: dataProses.length + dataSelesai.length
+    })
   if(props.dataProses.length === 0) {
     return (
       <>
+       <Nav total={total} />
+       
+       <main>
        <JudulHalaman judul="Proses Cuyy" />
         <NavTransaksi />
         
         <p className="f-average text-center text-secondary lead my-5">Maaf tidak ada data Proses! </p>
+       </main>
         
       </>
       )
   } else {
     return (
     <>
+    
+      <Nav total={total}/>
+      
+      <main>
       <JudulHalaman judul="Proses Cuyy" />
       <NavTransaksi />
       
@@ -50,7 +63,8 @@ function Proses(props) {
                       
                       
                      <Link to="/proses"> 
-                        <button className="btn btn-sm btn-warning m-1" onClick={props.tombolProses} id={index}>Selesai </button>
+                        <button className="btn btn-sm btn-warning m-1"
+                    onClick={() => props.tombolProses(index, setTotal)} id={index}>Selesai </button>
                      </Link>
                
                        </div>
@@ -60,6 +74,7 @@ function Proses(props) {
           )
       })}
       </div>
+      </main>
     </>
     
     )}
@@ -69,14 +84,17 @@ function Proses(props) {
 const stateProses = state => {
   return {
     dataProses: state.dataProses,
+    dataSelesai: state.dataSelesai,
+    dataKeranjang: state.dataKeranjang
   }
 }
 
 const actionProses = dispatch => {
   return {
-    tombolProses: e =>  dispatch({
+    tombolProses: (e, c) =>  dispatch({
       type: "tombolProses",
-      target: e.target
+      target: e,
+      callBack: c
    })
   }
 }
